@@ -42,7 +42,7 @@ app.get("/todos",async(req,res)=>{
 })
 // get a todo
 
-app.get("/todos/:id",async(res,req)=>{
+app.get("/todos/:id",async(req,res)=>{
 
     try {
         const { id } =req.params;
@@ -58,6 +58,19 @@ app.get("/todos/:id",async(res,req)=>{
 //update a todo
 
 // delete a todo
+
+app.delete("/todos/:id",async(req,res)=>{
+
+    try {
+          const {id}=req.params;
+          const deletetodo=await pool.query("DELETE FROM todo WHERE todo_id=$1",[id])
+          res.json("todo deleted")
+    } catch (error) {
+        console.error(error.message)
+    }
+
+
+})
 
 
 
